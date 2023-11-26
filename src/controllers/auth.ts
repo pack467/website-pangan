@@ -1,10 +1,15 @@
 import type { Request, Response, NextFunction } from "express";
-import { loginValidator } from "../validator/auth";
+import {
+  loginValidator,
+  userRegisterValidator,
+  adminRegisterValidator,
+} from "../validator/auth";
 import { User, Admin, Token } from "../models";
 import AppError from "../middlewares/error";
 import { compareHash } from "../helpers/encryption";
 import { createToken } from "../helpers/jwt";
 import createResponse from "../middlewares/response";
+import { v4 } from "uuid";
 
 export const loginHandler = async (
   req: Request,
@@ -39,6 +44,48 @@ export const loginHandler = async (
     });
 
     createResponse({ res, code: 200, data: access_token });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const userRegister = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { username, email, password } = await userRegisterValidator(req.body);
+
+    await User.create({
+      username,
+      email,
+      password,
+      UUID: v4(),
+    }); //validasi dilakuin sama sequelize
+
+    createResponse({ res, code: 201, message: "success register" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const adminRegister = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { name, email, password } = await adminRegisterValidator(req.body);
+
+    await Admin.create({
+      name,
+      email,
+      password,
+      UUID: v4(),
+    });
+
+    createResponse({ res, code: 201, message: "success register" });
   } catch (err) {
     next(err);
   }

@@ -5,6 +5,9 @@ import {
   ValidationErrorItem,
   UniqueConstraintError,
 } from "sequelize";
+import createResponse from "./response";
+import {TokenExpiredError,JsonWebTokenError} from 'jsonwebtoken'
+import { statusInvalidToken } from "../constant";
 
 export default function ErrorHandler(
     err:
@@ -50,5 +53,17 @@ export default function ErrorHandler(
           break;
         }
       }
+    }else if (err instanceof JsonWebTokenError || err instanceof TokenExpiredError) {
+        code = statusInvalidToken.statusCode
+        message = statusInvalidToken.message
     }
+    const payload: any = {
+        res,
+        code,
+        message,
+      };
+    if((err as ApplicationError).data) payload.data = (err as ApplicationError).data
+
+    createResponse
+    (payload)
 }

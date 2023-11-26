@@ -3,3 +3,9 @@ export interface LoginInput {
   password: string;
   as: "User" | "Admin";
 }
+
+export interface BaseRegisterInput {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}

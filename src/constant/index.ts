@@ -63,3 +63,13 @@ export const responseName: Record<number, string> = {
 };
 
 export const baseUrl = "/api/v1";
+
+export const statusForbidden: { message: string; statusCode: number } = {
+  message: "Forbidden",
+  statusCode: 403,
+};
+
+export const statusInvalidToken: { message: string; statusCode: number } = {
+  message: "Invalid Token",
+  statusCode: 401,
+};
