@@ -59,6 +59,7 @@ export = {
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         allowNull: false,
+        unique: true,
       },
       createdAt: {
         allowNull: false,

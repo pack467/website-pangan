@@ -27,6 +27,7 @@ export = {
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         allowNull: false,
+        unique:true
       },
       email: {
         type: Sequelize.STRING,

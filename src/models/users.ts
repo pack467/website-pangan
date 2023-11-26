@@ -11,6 +11,10 @@ export default class User extends Model<UserAttributes, any> {
   public createdAt!: Date;
   public updatedAt!: Date;
 
+  public static associate(models: any) {
+    User.hasOne(models.Token, { foreignKey: "userId" });
+  }
+
   public static initialize(sequelize: Sequelize) {
     this.init(
       {
@@ -31,6 +35,7 @@ export default class User extends Model<UserAttributes, any> {
           type: DataTypes.UUID,
           primaryKey: true,
           allowNull: false,
+          unique: true,
         },
         email: {
           type: DataTypes.STRING,

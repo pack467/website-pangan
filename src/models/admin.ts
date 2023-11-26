@@ -11,6 +11,10 @@ export default class Admin extends Model<AdminAttributes, any> {
   public createdAt!: Date;
   public updatedAt!: Date;
 
+  public static associate(models: any) {
+    Admin.hasOne(models.Token, { foreignKey: "adminId" });
+  }
+
   public static initialize(sequelize: Sequelize) {
     this.init(
       {
@@ -31,6 +35,7 @@ export default class Admin extends Model<AdminAttributes, any> {
           type: DataTypes.UUID,
           primaryKey: true,
           allowNull: false,
+          unique: true,
         },
         email: {
           type: DataTypes.STRING,

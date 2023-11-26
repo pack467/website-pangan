@@ -8,3 +8,6 @@ module.exports = {
 };
 
 // npx sequelize-cli migration:create --name NewColumn --migrations-path src/migrations
+20231126042915
+20231126053245
+20231126053304
