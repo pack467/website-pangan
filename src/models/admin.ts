@@ -14,6 +14,7 @@ export default class Admin extends Model<AdminAttributes, any> {
   public static associate(models: any) {
     Admin.hasOne(models.Token, { foreignKey: "adminId" });
     Admin.hasMany(models.Product, { foreignKey: "createdBy" });
+    Admin.hasMany(models.ProductType, { foreignKey: "createdBy" });
   }
 
   public static initialize(sequelize: Sequelize) {

@@ -10,6 +10,7 @@ export default class ProductType extends Model<ProductTypeAttributes, any> {
 
   public static associate(models: any) {
     ProductType.hasMany(models.Product, { foreignKey: "typeId" });
+    ProductType.belongsTo(models.Admin, { foreignKey: "createdBy" });
   }
 
   public static initialize(sequelize: Sequelize) {
