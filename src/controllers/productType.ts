@@ -1,10 +1,10 @@
 import type { Request, Response, NextFunction } from "express";
 import { validateCreateType } from "../validator/productTypes";
-import { ProductType } from "../models";
+import { Product, ProductType } from "../models";
 import { v4 } from "uuid";
 import createResponse from "../middlewares/response";
 import AppError from "../middlewares/error";
-import { statusDataNotFound } from "../constant";
+import { statusBadRequest, statusDataNotFound } from "../constant";
 
 export const addProductTypes = async (
   req: Request,
@@ -51,6 +51,28 @@ export const getAllProductTypes = async (
         totalPage: Math.ceil(totalData / limit),
       }
     );
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const deleteProductType = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { typeId } = req.params;
+
+    const products = await Product.findAll({ where: { typeId } });
+    if (products.length)
+      throw new AppError(
+        statusBadRequest("please delete product in this type first")
+      );
+
+    await ProductType.destroy({ where: { UUID: typeId } });
+
+    createResponse({ res, code: 200, message: "success" });
   } catch (err) {
     next(err);
   }

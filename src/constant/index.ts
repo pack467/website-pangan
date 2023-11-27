@@ -75,6 +75,13 @@ export const statusInvalidToken: { message: string; statusCode: number } = {
 };
 
 export const statusDataNotFound: { message: string; statusCode: number } = {
-  message: "Data not found",
+  message: "Data Not Found",
   statusCode: 404,
 };
+
+export const statusBadRequest = (
+  message = "Bad Request"
+): { message: string; statusCode: number } => ({
+  message,
+  statusCode: 400,
+});
