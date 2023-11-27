@@ -10,6 +10,7 @@ export const createProductValidate = async (data: any) =>
       price: yup.number().required("price is required"),
       desc: yup.string().default(""),
       stock: yup.number().required("stock is required"),
+      typeId:yup.string().required("typeId is requireds")
     }),
     data
   );

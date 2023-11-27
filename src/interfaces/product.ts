@@ -18,4 +18,5 @@ export interface CreateProductInput {
   price: number;
   desc: string;
   stock: number;
+  typeId: string;
 }

@@ -11,7 +11,9 @@ export const createProduct = async (
   next: NextFunction
 ) => {
   try {
-    const { name, stock, desc, price } = await createProductValidate(req.body);
+    const { name, stock, desc, price, typeId } = await createProductValidate(
+      req.body
+    );
     const files = await createProductImgValidate(req.files);
     const { UUID } = req.user;
 

@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "user-service-write",
+      name: "ecommerce-pangan",
       script: "./build/bin/www.js",
       instances: 1,
       autoRestart: true,
