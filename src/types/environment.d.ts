@@ -8,6 +8,9 @@ declare global {
       CORS_LIST: string;
       TS_NODE_IGNORE_DIAGNOSTICS: "2339" | string;
       SECRET: Secret | string;
+      IMAGEKIT_PRIVATE_KEY: string;
+      IMAGEKIT_PUBLIC_KEY: string;
+      IMAGEKIT_ENDPOINT_URL: string;
     }
   }
 }

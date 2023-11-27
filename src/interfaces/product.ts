@@ -7,6 +7,15 @@ export interface ProductAttributes {
   imageUrl: string | null;
   imageId: string | null;
   createdBy: string;
+  UUID: string;
+  typeId: string;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface CreateProductInput {
+  name: string;
+  price: number;
+  desc: string;
+  stock: number;
 }

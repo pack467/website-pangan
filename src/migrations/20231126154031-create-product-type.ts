@@ -2,49 +2,24 @@ import { QueryInterface } from "sequelize";
 
 export = {
   up(queryInterface: QueryInterface, Sequelize: any) {
-    return queryInterface.createTable("Products", {
+    return queryInterface.createTable("ProductTypes", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      type: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      price: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      desc: {
-        type: Sequelize.STRING,
-        defaultValue: "",
-      },
-      stock: {
-        type: Sequelize.INTEGER,
         allowNull: false,
         validate: {
           notEmpty: {
-            msg: "stock is required",
+            msg: "type is required",
           },
           notNull: {
-            msg: "stock is required",
+            msg: "type is required",
           },
         },
-      },
-      status: {
-        type: Sequelize.ENUM,
-        allowNull: false,
-        values: ["available", "not available", "preorder"],
-        defaultValue: "available",
-      },
-      imageUrl: {
-        type: Sequelize.STRING,
-      },
-      imageId: {
-        type: Sequelize.STRING,
       },
       createdBy: {
         type: Sequelize.UUID,
@@ -58,6 +33,13 @@ export = {
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
+      UUID: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        primaryKey: true,
+        allowNull: false,
+        unique: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -69,6 +51,6 @@ export = {
     });
   },
   down(queryInterface: QueryInterface, Sequelize: any) {
-    return queryInterface.dropTable("Products");
+    return queryInterface.dropTable("ProductTypes");
   },
 };

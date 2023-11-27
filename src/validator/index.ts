@@ -49,3 +49,17 @@ export const passwordValidation = (password: string) => {
 
   return true;
 };
+
+export const imageValidator = {
+  fieldname: yup.string(),
+  originalname: yup.string(),
+  encoding: yup.string(),
+  buffer: yup.mixed(),
+  mimetype: yup
+    .string()
+    .oneOf(
+      ["image/jpeg", "image/jpg", "image/png"],
+      "image must be oneof .jpg .jpeg .png"
+    ),
+  size: yup.number().max(10000000, "Maksimum ukuran lampiran foto adalah 10MB"),
+};

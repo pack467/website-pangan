@@ -10,11 +10,14 @@ export default class Product extends Model<ProductAttributes, any> {
   public imageUrl!: string | null;
   public imageId!: string | null;
   public createdBy!: string;
+  public typeId!: string;
+  public UUID!: string;
   public createdAt!: Date;
   public updatedAt!: Date;
 
   public static associate(models: any) {
     Product.hasOne(models.Admin, { foreignKey: "createdBy" });
+    Product.belongsTo(models.ProductType, { foreignKey: "typeId" });
   }
 
   public static initialize(sequelize: Sequelize) {
@@ -83,6 +86,24 @@ export default class Product extends Model<ProductAttributes, any> {
           },
           onDelete: "CASCADE",
           onUpdate: "CASCADE",
+        },
+        typeId: {
+          type: DataTypes.UUID,
+          allowNull: true,
+          references: {
+            model: {
+              tableName: "ProductTypes",
+            },
+            key: "UUID",
+          },
+          onDelete: "CASCADE",
+          onUpdate: "CASCADE",
+        },
+        UUID: {
+          type: DataTypes.UUID,
+          primaryKey: true,
+          allowNull: false,
+          unique: true,
         },
         createdAt: {
           allowNull: false,
