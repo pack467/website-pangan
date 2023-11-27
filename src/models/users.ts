@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
-import { HookReturn } from "sequelize/types/hooks";
+import type { HookReturn } from "sequelize/types/hooks";
 import { hash } from "../helpers/encryption";
 import type { UserAttributes } from "../interfaces/user";
 

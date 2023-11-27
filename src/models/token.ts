@@ -1,5 +1,4 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
-import { HookReturn } from "sequelize/types/hooks";
 
 export default class Token extends Model<any, any> {
   public access_token!: string;

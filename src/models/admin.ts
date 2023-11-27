@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
-import { HookReturn } from "sequelize/types/hooks";
+import type { HookReturn } from "sequelize/types/hooks";
 import { hash } from "../helpers/encryption";
 import type { AdminAttributes } from "../interfaces/admin";
 
@@ -13,6 +13,7 @@ export default class Admin extends Model<AdminAttributes, any> {
 
   public static associate(models: any) {
     Admin.hasOne(models.Token, { foreignKey: "adminId" });
+    Admin.hasMany(models.Product, { foreignKey: "createdBy" });
   }
 
   public static initialize(sequelize: Sequelize) {
