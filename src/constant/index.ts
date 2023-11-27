@@ -73,3 +73,8 @@ export const statusInvalidToken: { message: string; statusCode: number } = {
   message: "Invalid Token",
   statusCode: 401,
 };
+
+export const statusDataNotFound: { message: string; statusCode: number } = {
+  message: "Data not found",
+  statusCode: 404,
+};
