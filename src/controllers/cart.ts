@@ -55,3 +55,36 @@ export const deleteCart = async (
     next(err);
   }
 };
+
+export const getMyCart = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const { UUID } = req.user;
+
+    const { rows: data, count: totalData } = await Cart.findAndCountAll({
+      where: { userId: UUID },
+      order: [["createdAt", "DESC"]],
+      offset: (page - 1) * limit,
+      limit,
+    });
+
+    if (!data.length) throw new AppError(statusDataNotFound);
+
+    createResponse(
+      { res, code: 200, message: "OK", data },
+      {
+        page,
+        limit,
+        totalData,
+        totalPage: Math.ceil(totalData / limit),
+      }
+    );
+  } catch (err) {
+    next(err);
+  }
+};
