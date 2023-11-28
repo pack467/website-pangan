@@ -165,3 +165,20 @@ export const getAllProduct = async (
     next(err);
   }
 };
+
+export const getProductById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { UUID } = req.params;
+
+    const data = await Product.findOne({ where: { UUID } });
+    if (!data) throw new AppError(statusDataNotFound);
+
+    createResponse({ res, code: 200, message: "OK", data });
+  } catch (err) {
+    next(err);
+  }
+};
