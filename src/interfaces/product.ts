@@ -4,8 +4,6 @@ export interface ProductAttributes {
   desc: string;
   stock: number;
   status: "available" | "not available" | "preorder";
-  imageUrl: string | null;
-  imageId: string | null;
   createdBy: string;
   readonly UUID: string;
   typeId: string;

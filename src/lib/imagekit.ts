@@ -1,7 +1,7 @@
 import Imagekit from "imagekit";
 
 export type UploadImgProps = {
-  path: string;
+  path: string | Buffer;
   fileName: string;
   folder: string;
 };

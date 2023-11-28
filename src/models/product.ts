@@ -7,8 +7,6 @@ export default class Product extends Model<ProductAttributes, any> {
   public desc!: string;
   public stock!: number;
   public status!: "available" | "not available" | "preorder";
-  public imageUrl!: string | null;
-  public imageId!: string | null;
   public createdBy!: string;
   public typeId!: string;
   public readonly UUID!: string;
@@ -69,12 +67,6 @@ export default class Product extends Model<ProductAttributes, any> {
           type: DataTypes.ENUM,
           values: ["available", "not available", "preorder"],
           defaultValue: "available",
-        },
-        imageUrl: {
-          type: DataTypes.STRING,
-        },
-        imageId: {
-          type: DataTypes.STRING,
         },
         createdBy: {
           type: DataTypes.UUID,
