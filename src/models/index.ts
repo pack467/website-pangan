@@ -9,6 +9,7 @@ import ProductType from "./producttype";
 import ProductImg from "./productimg";
 import Cart from "./cart";
 import Wallet from "./wallet";
+import Transaction from "./transaction";
 
 const config = require("../../config/config.json");
 require("dotenv/config");
@@ -46,6 +47,7 @@ const model = [
   ProductImg,
   Cart,
   Wallet,
+  Transaction,
 ];
 
 model.forEach((el) => {
@@ -62,6 +64,7 @@ model.forEach((el) => {
     ProductImg,
     Cart,
     Wallet,
+    Transaction,
   });
 });
 

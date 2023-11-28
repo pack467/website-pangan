@@ -15,6 +15,7 @@ export default class User extends Model<UserAttributes, any> {
     User.hasOne(models.Token, { foreignKey: "userId" });
     User.hasMany(models.Cart, { foreignKey: "userId" });
     User.hasOne(models.Wallet, { foreignKey: "userId" });
+    User.hasMany(models.Transaction, { foreignKey: "userId" });
   }
 
   public static initialize(sequelize: Sequelize) {
