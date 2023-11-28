@@ -126,3 +126,42 @@ export const updateProduct = async (
     next(err);
   }
 };
+
+export const getAllProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const { sorting = "createdAt", sort } = req.query as Record<string, string>;
+
+    const { rows: data, count: totalData } = await Product.findAndCountAll({
+      offset: (page - 1) * limit,
+      limit,
+      order: [
+        [
+          ["createdat", "price", "name"].includes(sorting.toLowerCase())
+            ? sorting
+            : "createdAt",
+          ["ASC", "DESC"].includes(sort.toUpperCase()) ? sort : "DESC",
+        ],
+      ],
+    });
+
+    if (!data.length) throw new AppError(statusDataNotFound);
+
+    createResponse(
+      { res, code: 200, message: "OK", data },
+      {
+        page,
+        limit,
+        totalData,
+        totalPage: Math.ceil(totalData / limit),
+      }
+    );
+  } catch (err) {
+    next(err);
+  }
+};
