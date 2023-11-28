@@ -85,3 +85,8 @@ export const statusBadRequest = (
   message,
   statusCode: 400,
 });
+
+export const statusConflict: { message: string; statusCode: number } = {
+  message: "Conflict",
+  statusCode: 409,
+};

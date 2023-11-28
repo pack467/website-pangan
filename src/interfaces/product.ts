@@ -7,7 +7,7 @@ export interface ProductAttributes {
   imageUrl: string | null;
   imageId: string | null;
   createdBy: string;
-  UUID: string;
+  readonly UUID: string;
   typeId: string;
   createdAt: Date;
   updatedAt: Date;

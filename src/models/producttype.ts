@@ -4,7 +4,7 @@ import type { ProductTypeAttributes } from "../interfaces/productType";
 export default class ProductType extends Model<ProductTypeAttributes, any> {
   public type!: string;
   public createdBy!: string;
-  public UUID!: string;
+  public readonly UUID!: string;
   public createdAt!: Date;
   public updatedAt!: Date;
 

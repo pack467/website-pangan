@@ -2,7 +2,7 @@ import type { NextFunction, Request, Response } from "express";
 import AppError from "./error";
 import { statusInvalidToken } from "../constant";
 import { verifyToken } from "../helpers/jwt";
-import { Admin, User } from "../models";
+import { Admin, Token, User } from "../models";
 
 export default async function authentication(
   req: Request,
@@ -12,6 +12,9 @@ export default async function authentication(
   try {
     const { access_token } = req.headers as Record<string, string>;
     if (!access_token) throw new AppError(statusInvalidToken);
+
+    const token = await Token.findOne({ where: { access_token } });
+    if (!token) throw new AppError(statusInvalidToken); //nanti jadiin 1 query
 
     const { UUID, loggedAs } = verifyToken(access_token);
 

@@ -1,7 +1,7 @@
 export interface ProductTypeAttributes {
   type: string;
   createdBy: string;
-  UUID: string;
+  readonly UUID: string;
   createdAt: Date;
   updatedAt: Date;
 }

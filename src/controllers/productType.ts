@@ -4,7 +4,11 @@ import { Product, ProductType } from "../models";
 import { v4 } from "uuid";
 import createResponse from "../middlewares/response";
 import AppError from "../middlewares/error";
-import { statusBadRequest, statusDataNotFound } from "../constant";
+import {
+  statusBadRequest,
+  statusConflict,
+  statusDataNotFound,
+} from "../constant";
 
 export const addProductTypes = async (
   req: Request,
@@ -14,6 +18,9 @@ export const addProductTypes = async (
   try {
     const { type } = await validateCreateType(req.body);
     const { UUID } = req.user;
+
+    if (await ProductType.findOne({ where: { type } }))
+      throw new AppError(statusConflict);
 
     await ProductType.create({
       type,
@@ -63,6 +70,9 @@ export const deleteProductType = async (
 ) => {
   try {
     const { typeId } = req.params;
+
+    if (await ProductType.findOne({ where: { UUID: typeId } }))
+      throw new AppError(statusDataNotFound);
 
     const products = await Product.findAll({ where: { typeId } });
     if (products.length)

@@ -10,20 +10,17 @@ export const createProductValidate = async (data: any) =>
       price: yup.number().required("price is required"),
       desc: yup.string().default(""),
       stock: yup.number().required("stock is required"),
-      typeId:yup.string().required("typeId is requireds")
+      typeId: yup.string().required("typeId is requireds"),
     }),
     data
   );
 
 export const createProductImgValidate = async (data: any) =>
   await validate<MulterFile[]>(
-    yup.object({
-      productImg: yup
-        .array()
-        .of(yup.object(imageValidator))
-        .min(1, "At least one image is required")
-        .max(4, "4 images is the limit")
-        .required(),
-    }),
+    yup
+      .array()
+      .of(yup.object(imageValidator))
+      .min(1, "At least one image is required")
+      .max(4, "4 images is the limit"),
     data
   );

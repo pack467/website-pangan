@@ -5,7 +5,7 @@ import type { AdminAttributes } from "../interfaces/admin";
 
 export default class Admin extends Model<AdminAttributes, any> {
   public name!: string;
-  public UUID!: string;
+  public readonly UUID!: string;
   public email!: string;
   public password!: string;
   public createdAt!: Date;

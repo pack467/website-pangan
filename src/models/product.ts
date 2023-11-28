@@ -11,13 +11,14 @@ export default class Product extends Model<ProductAttributes, any> {
   public imageId!: string | null;
   public createdBy!: string;
   public typeId!: string;
-  public UUID!: string;
+  public readonly UUID!: string;
   public createdAt!: Date;
   public updatedAt!: Date;
 
   public static associate(models: any) {
-    Product.hasOne(models.Admin, { foreignKey: "createdBy" });
+    Product.belongsTo(models.Admin, { foreignKey: "createdBy" });
     Product.belongsTo(models.ProductType, { foreignKey: "typeId" });
+    Product.hasMany(models.ProductImg, { foreignKey: "productId" });
   }
 
   public static initialize(sequelize: Sequelize) {

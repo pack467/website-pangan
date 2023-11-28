@@ -1,6 +1,6 @@
 export interface UserAttributes {
   username: string;
-  UUID: string;
+  readonly UUID: string;
   email: string;
   password: string;
   createdAt: Date;

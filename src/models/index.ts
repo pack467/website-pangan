@@ -6,6 +6,7 @@ import Admin from "./admin";
 import Token from "./token";
 import Product from "./product";
 import ProductType from "./producttype";
+import ProductImg from "./productimg";
 
 const config = require("../../config/config.json");
 require("dotenv/config");
@@ -34,14 +35,22 @@ if (process.env.NODE_ENV === "test") {
   );
 }
 
-const model = [User, Admin, Token, Product, ProductType];
+const model = [User, Admin, Token, Product, ProductType, ProductImg];
 
 model.forEach((el) => {
   el.initialize(sequelize);
 });
 
 model.forEach((el) => {
-  el.associate({ User, Admin, Token, Product, ProductType });
+  el.associate({ User, Admin, Token, Product, ProductType, ProductImg });
 });
 
-export { sequelize as Db, User, Admin, Token, Product, ProductType };
+export {
+  sequelize as Db,
+  User,
+  Admin,
+  Token,
+  Product,
+  ProductType,
+  ProductImg,
+};

@@ -5,7 +5,7 @@ import type { UserAttributes } from "../interfaces/user";
 
 export default class User extends Model<UserAttributes, any> {
   public username!: string;
-  public UUID!: string;
+  public readonly UUID!: string;
   public email!: string;
   public password!: string;
   public createdAt!: Date;
