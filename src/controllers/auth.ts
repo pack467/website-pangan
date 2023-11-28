@@ -4,7 +4,7 @@ import {
   userRegisterValidator,
   adminRegisterValidator,
 } from "../validator/auth";
-import { User, Admin, Token } from "../models";
+import { User, Admin, Token, Db, Wallet } from "../models";
 import AppError from "../middlewares/error";
 import { compareHash } from "../helpers/encryption";
 import { createToken } from "../helpers/jwt";
@@ -54,18 +54,33 @@ export const userRegister = async (
   res: Response,
   next: NextFunction
 ) => {
+  const transaction = await Db.transaction();
   try {
     const { username, email, password } = await userRegisterValidator(req.body);
 
-    await User.create({
-      username,
-      email,
-      password,
-      UUID: v4(),
-    }); //validasi dilakuin sama sequelize
+    const { UUID } = await User.create(
+      {
+        username,
+        email,
+        password,
+        UUID: v4(),
+      },
+      { transaction }
+    ); //validasi dilakuin sama sequelize
 
+    await Wallet.create(
+      {
+        userId: UUID,
+        balance: 0,
+        UUID: v4(),
+      },
+      { transaction }
+    );
+
+    await transaction.commit();
     createResponse({ res, code: 201, message: "success register" });
   } catch (err) {
+    await transaction.rollback();
     next(err);
   }
 };

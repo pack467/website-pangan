@@ -1,25 +1,13 @@
 import { QueryInterface } from "sequelize";
 
-export = {
+module.exports = {
   up(queryInterface: QueryInterface, Sequelize: any) {
-    return queryInterface.createTable("Carts", {
+    return queryInterface.createTable("Wallets", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-      },
-      productId: {
-        type: Sequelize.UUID,
-        allowNull: true,
-        references: {
-          model: {
-            tableName: "Products",
-          },
-          key: "UUID",
-        },
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
       },
       userId: {
         type: Sequelize.UUID,
@@ -32,6 +20,10 @@ export = {
         },
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
+      },
+      balance: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       UUID: {
         type: Sequelize.UUID,
@@ -51,6 +43,6 @@ export = {
     });
   },
   down(queryInterface: QueryInterface, Sequelize: any) {
-    return queryInterface.dropTable("Carts");
+    return queryInterface.dropTable("Wallets");
   },
 };
