@@ -90,3 +90,8 @@ export const statusConflict: { message: string; statusCode: number } = {
   message: "Conflict",
   statusCode: 409,
 };
+
+export const statusUnauthorized: { message: string; statusCode: number } = {
+  message: "unauthorized",
+  statusCode: 401,
+};
