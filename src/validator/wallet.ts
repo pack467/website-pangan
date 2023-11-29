@@ -8,8 +8,7 @@ export const topupValidator = async (data: any) =>
       payment_type: yup
         .string()
         .required("payment_type is required")
-        .oneOf(["bank_transfer"]),
-      item_name: yup.string().required("item_name is required"),
+        .oneOf(["Top Up", "Payment"], "invalid payment_type"),
       amount: yup.number().required("amount is required"),
       bank: yup
         .string()

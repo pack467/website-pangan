@@ -5,7 +5,7 @@ declare module "midtrans-client" {
     clientKey: string;
   }
 
-  interface ChargeResp {
+  export interface ChargeResp {
     order_id: string;
     gross_amount: string;
     payment_type: string;
@@ -17,14 +17,32 @@ declare module "midtrans-client" {
     signature_key: string;
     status_code: string;
     transaction_id: string;
-    transaction_status: string;
+    transaction_status: TransactionStatus;
     status_message: string;
   }
+
+  export type TransactionStatus =
+    | "authorize"
+    | "capture"
+    | "settlement"
+    | "deny"
+    | "pending"
+    | "cancel"
+    | "refund"
+    | "partial_refund"
+    | "chargeback"
+    | "partial_chargeback"
+    | "expire"
+    | "failure";
 
   class CoreApi {
     constructor(config: CoreApiConfig);
 
     charge(payload: Record<string, any>): Promise<ChargeResp>;
+
+    transaction = {
+      notification(body: Record<string, any>): Promise<ChargeResp>;,
+    };
   }
 
   export { CoreApi };

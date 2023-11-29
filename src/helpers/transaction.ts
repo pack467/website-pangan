@@ -1,4 +1,4 @@
-import type { Bank, TopupInput } from "../interfaces/wallet";
+import type { Bank, PaymentType, TopupInput } from "../interfaces/wallet";
 
 export interface UserTransactionDetail {
   UUID: string;
@@ -7,13 +7,27 @@ export interface UserTransactionDetail {
 }
 
 abstract class TransactionUtils {
-  protected generateOrderId(UUID: string) {
-    return `WP-${UUID}-${Math.round(new Date().getTime() / 1000)}`;
+  protected generateOrderId(UUID: string, payment_type: PaymentType) {
+    return `WP-${UUID.replace(/-/g, ".")}-${this.generateString(5)}-${
+      payment_type === "Top Up" ? "T" : "P"
+    }`;
+  }
+
+  private generateString(length: number) {
+    let result = "";
+    let characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (let i = 0; i < length; i++)
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    return result;
   }
 }
 
 export class GenerateBankTransaction extends TransactionUtils {
-  public payment_type: "bank_transfer";
+  public payment_type: PaymentType;
   public item_name: string;
   public amount: number;
   public bank: Bank;
@@ -28,10 +42,10 @@ export class GenerateBankTransaction extends TransactionUtils {
     UUID,
     username,
     email,
-  }: TopupInput & UserTransactionDetail) {
+  }: TopupInput & UserTransactionDetail & { item_name?: string }) {
     super();
     this.payment_type = payment_type;
-    this.item_name = item_name;
+    this.item_name = item_name || "Topup";
     this.amount = amount;
     this.bank = bank;
     this.UUID = UUID;
@@ -41,10 +55,10 @@ export class GenerateBankTransaction extends TransactionUtils {
 
   public generateParameter() {
     return {
-      payment_type: this.payment_type,
+      payment_type: "bank_transfer",
       transaction_details: {
         gross_amount: this.amount,
-        order_id: this.generateOrderId(this.UUID),
+        order_id: this.generateOrderId(this.UUID, this.payment_type),
       },
       customer_details: {
         email: this.email,

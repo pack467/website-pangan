@@ -7,10 +7,11 @@ export interface WalletAttributes {
 }
 
 export interface TopupInput {
-  payment_type: "bank_transfer";
-  item_name: string;
+  payment_type: PaymentType;
   amount: number;
   bank: Bank;
 }
 
 export type Bank = "BCA" | "BNI" | "PERMATA" | "BRI";
+
+export type PaymentType = "Top Up" | "Payment";
