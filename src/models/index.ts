@@ -22,19 +22,34 @@ if (process.env.NODE_ENV === "test") {
     config.test.database,
     config.test.username,
     config.test.password,
-    <Options>config.test
+    {
+      ...(<Options>config.test),
+      dialectOptions: {
+        connectTimeout: 60000,
+      },
+    }
   );
 } else if (
   process.env.NODE_ENV === "production" ||
   process.env[config.use_env_variable]
 ) {
-  sequelize = new Sequelize(production, <Options>config.production);
+  sequelize = new Sequelize(production, {
+    ...(<Options>config.production),
+    dialectOptions: {
+      connectTimeout: 60000,
+    },
+  });
 } else {
   sequelize = new Sequelize(
     config.development.database,
     config.development.username,
     config.development.password,
-    <Options>config.development
+    {
+      ...(<Options>config.development),
+      dialectOptions: {
+        connectTimeout: 60000,
+      },
+    }
   );
 }
 

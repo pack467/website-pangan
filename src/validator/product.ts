@@ -1,6 +1,9 @@
 import * as yup from "yup";
 import validate, { imageValidator } from ".";
-import type { CreateProductInput } from "../interfaces/product";
+import type {
+  CreateProductInput,
+  PurchaseProductValidate,
+} from "../interfaces/product";
 import type { MulterFile } from "../interfaces";
 import { Product } from "../models";
 
@@ -41,5 +44,21 @@ export const createProductImgValidate = async (data: any) =>
       .of(yup.object(imageValidator))
       .min(1, "At least one image is required")
       .max(4, "4 images is the limit"),
+    data
+  );
+
+export const buyProductValidate = async (data: any) =>
+  await validate<PurchaseProductValidate>(
+    yup.object().shape({
+      items: yup
+        .array()
+        .of(
+          yup.object({
+            itemId: yup.string().required("please input items id"),
+            total: yup.number().default(1),
+          })
+        )
+        .min(1, "input atleast 1 item"),
+    }),
     data
   );

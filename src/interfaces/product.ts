@@ -18,3 +18,12 @@ export interface CreateProductInput {
   stock: number;
   typeId: string;
 }
+
+export interface PurchaseProduct {
+  itemId: string;
+  total: number;
+}
+
+export interface PurchaseProductValidate {
+  items: PurchaseProduct[];
+}
