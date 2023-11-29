@@ -11,6 +11,10 @@ declare global {
       IMAGEKIT_PRIVATE_KEY: string;
       IMAGEKIT_PUBLIC_KEY: string;
       IMAGEKIT_ENDPOINT_URL: string;
+      MIDTRANS_SERVER_KEY: string;
+      MIDTRANS_CLIENT_KEY: string;
+      MIDTRANS_MERCHANT_ID: string;
+      ENCRYPTION_KEY: string;
     }
   }
 }
