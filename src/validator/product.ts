@@ -6,6 +6,7 @@ import type {
 } from "../interfaces/product";
 import type { MulterFile } from "../interfaces";
 import { Product } from "../models";
+import { Bank } from "../interfaces/wallet";
 
 export const createProductValidate = async (data: any) =>
   await validate<CreateProductInput>(
@@ -47,18 +48,35 @@ export const createProductImgValidate = async (data: any) =>
     data
   );
 
+const buyItemValidation = {
+  items: yup
+    .array()
+    .of(
+      yup.object({
+        itemId: yup.string().required("please input items id"),
+        total: yup.number().default(1),
+      })
+    )
+    .min(1, "input atleast 1 item"),
+};
+
 export const buyProductValidate = async (data: any) =>
   await validate<PurchaseProductValidate>(
+    yup.object().shape(buyItemValidation),
+    data
+  );
+
+export const buyProductByVaValidate = async (data: any) =>
+  await validate<PurchaseProductValidate & { bank: Bank }>(
     yup.object().shape({
-      items: yup
-        .array()
-        .of(
-          yup.object({
-            itemId: yup.string().required("please input items id"),
-            total: yup.number().default(1),
-          })
-        )
-        .min(1, "input atleast 1 item"),
+      ...buyItemValidation,
+      bank: yup
+        .string()
+        .required("bank is required")
+        .oneOf(
+          ["BCA", "BNI", "PERMATA", "BRI"],
+          "invalid bank/bank is not provided"
+        ),
     }),
     data
   );

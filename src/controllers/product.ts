@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import {
+  buyProductByVaValidate,
   buyProductValidate,
   createProductImgValidate,
   createProductValidate,
@@ -20,7 +21,16 @@ import { bulkUploadImg } from "../lib/imagekit";
 import { readdirSync, unlinkSync, readFileSync } from "fs";
 import { v4 } from "uuid";
 import { Op } from "sequelize";
-import type { PurchaseProduct } from "../interfaces/product";
+import {
+  countTransactionValue,
+  searchNotFoundDataTransaction,
+  searchOutOfStockDataTransaction,
+} from "../helpers";
+import type { UserAttributes } from "../interfaces/user";
+import { GeneratePaymentTransaction } from "../helpers/transaction";
+import { PurchaseProduct } from "../interfaces/product";
+import core from "../lib/midtrans";
+import { sha512 } from "js-sha512";
 
 export const createProduct = async (
   req: Request,
@@ -214,19 +224,12 @@ export const buyProductsByWallet = async (
 
     if (!products.length) throw new AppError(statusDataNotFound);
 
-    const notFoundData: string[] = [];
-    for (const item of items)
-      if (!products.map((el) => el.UUID).includes(item.itemId))
-        notFoundData.push(item.itemId);
+    const notFoundData = searchNotFoundDataTransaction(items, products);
 
     if (notFoundData.length)
       throw new AppError({ ...statusDataNotFound, data: notFoundData });
 
-    const outOfStock: string[] = [];
-    for (const product of products)
-      for (const item of items)
-        if (item.itemId === product.UUID && product.stock < item.total)
-          outOfStock.push(item.itemId);
+    const outOfStock = searchOutOfStockDataTransaction(items, products);
 
     if (outOfStock.length)
       throw new AppError({
@@ -243,13 +246,7 @@ export const buyProductsByWallet = async (
     if (!wallet)
       throw new AppError({ message: "wallet not found", statusCode: 404 });
 
-    const totalPrice = products
-      .map(
-        ({ price, UUID }) =>
-          (items.find((el) => el.itemId === UUID) as PurchaseProduct).total *
-          price
-      )
-      .reduce((prev, curr) => prev + curr);
+    const totalPrice = countTransactionValue(items, products);
 
     if (wallet.balance < totalPrice)
       throw new AppError({
@@ -293,6 +290,104 @@ export const buyProductsByWallet = async (
 
     await transaction.commit();
     createResponse({ res, code: 201, message: "success" });
+  } catch (err) {
+    await transaction.rollback();
+    next(err);
+  }
+};
+
+export const buyProductsByVa = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const transaction = await Db.transaction();
+  try {
+    const { UUID, email, username } = req.user as UserAttributes;
+    const { items, bank } = await buyProductByVaValidate(req.body);
+
+    const products = await Product.findAll({
+      where: {
+        UUID: {
+          [Op.in]: items.map((item) => item.itemId),
+        },
+      },
+      lock: transaction.LOCK.UPDATE,
+    });
+
+    if (!products.length) throw new AppError(statusDataNotFound);
+
+    const notFoundData = searchNotFoundDataTransaction(items, products);
+
+    if (notFoundData.length)
+      throw new AppError({ ...statusDataNotFound, data: notFoundData });
+
+    const outOfStock = searchOutOfStockDataTransaction(items, products);
+
+    if (outOfStock.length)
+      throw new AppError({
+        statusCode: 400,
+        message: "data out of stock",
+        data: outOfStock,
+      });
+
+    const totalPrice = countTransactionValue(items, products);
+    const payload = new GeneratePaymentTransaction({
+      username,
+      UUID,
+      email,
+      bank,
+      items: products.map((product) => ({
+        price: product.price,
+        quantity:
+          (items.find((el) => el.itemId === product.UUID) as PurchaseProduct)
+            ?.total || 1,
+        name: product.name,
+        merchant_name: "WP",
+      })),
+      totalTransaction: totalPrice,
+    }).bodyRequest();
+
+    const data = await core.charge(payload);
+
+    const signature = sha512(
+      data.order_id +
+        "200" +
+        data.gross_amount +
+        process.env.MIDTRANS_SERVER_KEY
+    );
+
+    await Transaction.create(
+      {
+        userId: UUID,
+        type: "Payment",
+        status: "Pending",
+        amount: totalPrice,
+        signature,
+        UUID: v4(),
+      },
+      { transaction }
+    );
+
+    await Promise.all(
+      items.map(async (item) => {
+        const product = products.find(
+          (el) => el.UUID === item.itemId
+        ) as Product;
+        const newStock = product.stock - item.total;
+        const update: any = { stock: newStock };
+
+        if (newStock === 0) update.status = "not available";
+
+        return await Product.update(update, {
+          where: { UUID: item.itemId },
+          transaction,
+        });
+      })
+    );
+
+    await transaction.commit();
+    createResponse({ res, code: 201, message: "success", data });
   } catch (err) {
     await transaction.rollback();
     next(err);

@@ -47,7 +47,6 @@ export const Topup = async (
       data,
     });
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };
@@ -99,9 +98,9 @@ export const paymentNotif = async (
             break;
           }
           case "P": {
-            await Wallet.update(
-              { balance: wallet.balance - Number(gross_amount) },
-              { where: { userId: UUID }, transaction }
+            await Transaction.update(
+              { status: "Success" },
+              { where: { UUID: req.transaction.UUID }, transaction }
             );
           }
         }
@@ -127,6 +126,10 @@ export const paymentNotif = async (
           { status },
           { where: { signature: signature_key }, transaction }
         );
+
+        // if (type === 'P') {
+        //balikin stock
+        // }
         break;
       }
       case transaction_status === "refund": {
@@ -143,7 +146,6 @@ export const paymentNotif = async (
     await transaction.commit();
     createResponse({ res, code: 200, message: transaction_status });
   } catch (err) {
-    console.log(err)
     await transaction.rollback();
     next(err);
   }

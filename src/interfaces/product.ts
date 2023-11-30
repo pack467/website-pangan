@@ -27,3 +27,10 @@ export interface PurchaseProduct {
 export interface PurchaseProductValidate {
   items: PurchaseProduct[];
 }
+
+export interface ItemDetails {
+  price: number;
+  quantity: number;
+  name: string;
+  merchant_name: "WP";
+}

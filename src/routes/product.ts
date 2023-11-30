@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  buyProductsByVa,
   buyProductsByWallet,
   createProduct,
   getAllProduct,
@@ -16,5 +17,6 @@ export default Router()
   .get("/", getAllProduct)
   .post("/", multer.array("productImg", 4), adminAuthorize, createProduct)
   .post("/wallet", userAuthorize, buyProductsByWallet)
+  .post("/va", userAuthorize, buyProductsByVa)
   .get("/:UUID", getProductById)
   .put("/:UUID", adminAuthorize, updateProduct);
