@@ -155,7 +155,10 @@ export const getAllProduct = async (
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
-    const { sorting = "createdAt", sort } = req.query as Record<string, string>;
+    const { sorting = "createdAt", sort = "DESC" } = req.query as Record<
+      string,
+      string
+    >;
 
     const { rows: data, count: totalData } = await Product.findAndCountAll({
       offset: (page - 1) * limit,
