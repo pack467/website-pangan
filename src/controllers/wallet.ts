@@ -8,6 +8,7 @@ import { Db, Transaction, User, Wallet } from "../models";
 import createResponse from "../middlewares/response";
 import AppError from "../middlewares/error";
 import { TransactionStatus } from "../interfaces/transaction";
+import { statusDataNotFound } from "../constant";
 
 export const Topup = async (
   req: Request,
@@ -147,6 +148,23 @@ export const paymentNotif = async (
     createResponse({ res, code: 200, message: transaction_status });
   } catch (err) {
     await transaction.rollback();
+    next(err);
+  }
+};
+
+export const getMyWallet = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { UUID } = req.user;
+
+    const data = await Wallet.findOne({ where: { userId: UUID } });
+    if (!data) throw new AppError(statusDataNotFound);
+
+    createResponse({ res, code: 200, data });
+  } catch (err) {
     next(err);
   }
 };
