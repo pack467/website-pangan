@@ -64,3 +64,52 @@ export const getMyTransaction = async (
     next(err);
   }
 };
+
+export const getAllTransaction = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const { sorting = "createdAt", sort = "DESC" } = req.query as Record<
+      string,
+      string
+    >;
+
+    const { rows: data, count: totalData } = await Transaction.findAndCountAll({
+      offset: (page - 1) * limit,
+      limit,
+      order: [
+        [
+          ["createdat", "status", "amount", "type"].includes(
+            sorting.toLowerCase()
+          )
+            ? sorting
+            : "createdAt",
+          ["ASC", "DESC"].includes(sort.toUpperCase()) ? sort : "DESC",
+        ],
+      ],
+    });
+
+    if (!data.length) throw new AppError(statusDataNotFound);
+
+    createResponse(
+      {
+        res,
+        code: 200,
+        message: "OK",
+        data,
+      },
+      {
+        page,
+        limit,
+        totalData,
+        totalPage: Math.ceil(totalData / limit),
+      }
+    );
+  } catch (err) {
+    next(err);
+  }
+};
