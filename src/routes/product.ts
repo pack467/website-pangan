@@ -11,11 +11,18 @@ import authentication from "../middlewares/authentication";
 import adminAuthorize from "../middlewares/adminAuthorize";
 import multer from "../middlewares/multer";
 import userAuthorize from "../middlewares/userAuthorize";
+import formDataOnly from "../middlewares/formDataOnly";
 
 export default Router()
   .use(authentication)
   .get("/", getAllProduct)
-  .post("/", multer.array("productImg", 4), adminAuthorize, createProduct)
+  .post(
+    "/",
+    formDataOnly,
+    multer.array("productImg", 4),
+    adminAuthorize,
+    createProduct
+  )
   .post("/wallet", userAuthorize, buyProductsByWallet)
   .post("/va", userAuthorize, buyProductsByVa)
   .get("/:UUID", getProductById)
