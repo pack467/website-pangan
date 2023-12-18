@@ -92,6 +92,7 @@ export const createProduct = async (
       res,
       code: 201,
       message: "success",
+      data: product,
     });
   } catch (err) {
     await transaction.rollback();
