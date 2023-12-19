@@ -10,6 +10,7 @@ import ProductImg from "./productimg";
 import Cart from "./cart";
 import Wallet from "./wallet";
 import Transaction from "./transaction";
+import Carousel from "./carousel";
 
 const config = require("../../config/config.json");
 require("dotenv/config");
@@ -63,6 +64,7 @@ const model = [
   Cart,
   Wallet,
   Transaction,
+  Carousel,
 ];
 
 model.forEach((el) => {
@@ -79,6 +81,7 @@ model.forEach((el) => {
     ProductImg,
     Cart,
     Wallet,
+    Carousel,
     Transaction,
   });
 });
@@ -93,5 +96,6 @@ export {
   ProductImg,
   Cart,
   Wallet,
+  Carousel,
   Transaction,
 };

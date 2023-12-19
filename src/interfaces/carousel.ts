@@ -4,3 +4,8 @@ export interface CarouselAttributes {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface AddCarouselInput {
+  productId: string;
+  imageId: string;
+}
