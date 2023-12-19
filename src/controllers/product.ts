@@ -199,7 +199,10 @@ export const getProductById = async (
   try {
     const { UUID } = req.params;
 
-    const data = await Product.findOne({ where: { UUID } });
+    const data = await Product.findOne({
+      where: { UUID },
+      include: [{ model: ProductImg }],
+    });
     if (!data) throw new AppError(statusDataNotFound);
 
     createResponse({ res, code: 200, message: "OK", data });
