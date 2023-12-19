@@ -1,29 +1,40 @@
-import type { Request, Response, NextFunction } from "express";
+import {
+  type Request,
+  type Response,
+  type NextFunction,
+  response,
+} from "express";
 import { createCarouselValidate } from "../validator/carousel";
 import { Carousel, Product, ProductImg } from "../models";
 import AppError from "../middlewares/error";
 import { statusConflict, statusDataNotFound } from "../constant";
 import createResponse from "../middlewares/response";
+import { ProductImgAttributes } from "../interfaces/productImg";
+import { ProductAttributes } from "../interfaces/product";
 
 export const addCarousel = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
-    const { productId, imageId } = await createCarouselValidate(req.body);
+    const { imageId } = await createCarouselValidate(req.body);
 
-    if (!(await Product.findOne({ where: { UUID: productId } })))
-      throw new AppError({ message: "product not found", statusCode: 404 });
+    const img = (await ProductImg.findOne({
+      where: { imageId },
+      include: [{ model: Product }],
+    })) as (ProductImgAttributes & { Product: ProductAttributes }) | null;
+    if (!img) throw new AppError(statusDataNotFound);
 
-    if (!(await ProductImg.findOne({ where: { imageId } })))
-      throw new AppError({ message: "product img not found", statusCode: 404 });
-
-    if (await Carousel.findOne({ where: { productId, imageId } }))
+    if (
+      await Carousel.findOne({
+        where: { imageId, productId: img.Product.UUID },
+      })
+    )
       throw new AppError(statusConflict);
 
     await Carousel.create({
-      productId,
+      productId: img.Product.UUID,
       imageId,
     });
 
@@ -36,7 +47,7 @@ export const addCarousel = async (
 export const deleteCarousel = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { imageId, productId } = req.params;
@@ -47,6 +58,24 @@ export const deleteCarousel = async (
     await Carousel.destroy({ where: { productId, imageId } });
 
     createResponse({ res, code: 200, message: "success" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getCarousel = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    createResponse({
+      res,
+      code: 200,
+      data: await Carousel.findAll({
+        include: [{ model: Product, include: [{ model: ProductImg }] }],
+      }),
+    });
   } catch (err) {
     next(err);
   }

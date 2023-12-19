@@ -6,6 +6,5 @@ export interface CarouselAttributes {
 }
 
 export interface AddCarouselInput {
-  productId: string;
   imageId: string;
 }
