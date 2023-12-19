@@ -1,16 +1,15 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
-import type { ProductImgAttributes } from "../interfaces/productImg";
+import type { CarouselAttributes } from "../interfaces/carousel";
 
-export default class ProductImg extends Model<ProductImgAttributes, any> {
-  public readonly productId!: string;
-  public imageUrl!: string;
+export default class Carousel extends Model<CarouselAttributes, any> {
+  public productId!: string;
   public imageId!: string;
   public createdAt!: Date;
   public updatedAt!: Date;
 
   public static associate(models: any) {
-    ProductImg.belongsTo(models.Product, { foreignKey: "productId" });
-    ProductImg.hasOne(models.Carousel, { foreignKey: "imageId" });
+    Carousel.belongsTo(models.Product, { foreignKey: "productId" });
+    Carousel.belongsTo(models.ProductImg, { foreignKey: "imageId" });
   }
 
   public static initialize(sequelize: Sequelize) {
@@ -18,7 +17,7 @@ export default class ProductImg extends Model<ProductImgAttributes, any> {
       {
         productId: {
           type: DataTypes.UUID,
-          allowNull: true,
+          allowNull: false,
           references: {
             model: {
               tableName: "Products",
@@ -27,29 +26,25 @@ export default class ProductImg extends Model<ProductImgAttributes, any> {
           },
           onDelete: "CASCADE",
           onUpdate: "CASCADE",
-        },
-        imageUrl: {
-          type: DataTypes.STRING,
-          allowNull: false,
           validate: {
-            notEmpty: {
-              msg: "imageUrl is required",
-            },
-            notNull: {
-              msg: "imageUrl is required",
-            },
+            notNull: { msg: "productId is required" },
+            notEmpty: { msg: "productId is required" },
           },
         },
         imageId: {
           type: DataTypes.STRING,
           allowNull: false,
+          references: {
+            model: {
+              tableName: "ProductImgs",
+            },
+            key: "imageId",
+          },
+          onDelete: "CASCADE",
+          onUpdate: "CASCADE",
           validate: {
-            notEmpty: {
-              msg: "imageId is required",
-            },
-            notNull: {
-              msg: "imageId is required",
-            },
+            notNull: { msg: "imageId is required" },
+            notEmpty: { msg: "imageId is required" },
           },
         },
         createdAt: {
@@ -63,7 +58,7 @@ export default class ProductImg extends Model<ProductImgAttributes, any> {
       },
       {
         sequelize,
-        modelName: "ProductImgs",
+        modelName: "Carousels",
       }
     );
   }

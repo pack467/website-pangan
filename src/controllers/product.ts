@@ -172,6 +172,7 @@ export const getAllProduct = async (
           ["ASC", "DESC"].includes(sort.toUpperCase()) ? sort : "DESC",
         ],
       ],
+      include: [{ model: ProductImg }],
     });
 
     if (!data.length) throw new AppError(statusDataNotFound);

@@ -18,6 +18,7 @@ export default class Product extends Model<ProductAttributes, any> {
     Product.belongsTo(models.ProductType, { foreignKey: "typeId" });
     Product.hasMany(models.ProductImg, { foreignKey: "productId" });
     Product.hasMany(models.Cart, { foreignKey: "productId" });
+    Product.hasOne(models.Carousel, { foreignKey: "productId" });
   }
 
   public static initialize(sequelize: Sequelize) {
