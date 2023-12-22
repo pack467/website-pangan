@@ -1,0 +1,352 @@
+[
+  {
+    "name": "'ohe",
+    "price": 10000,
+    "desc": "Supplement Ampulla Vater with Autol Sub, Perc Endo Approach",
+    "stock": 1,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Johnston's Phlox",
+    "price": 10000,
+    "desc": "Insertion of Radioact Elem into Rectum, Perc Endo Approach",
+    "stock": 2,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Palustriella Moss",
+    "price": 10000,
+    "desc": "Supplement Upper Artery with Autol Sub, Open Approach",
+    "stock": 3,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Artichoke Betony",
+    "price": 10000,
+    "desc": "Excision of Right Adrenal Gland, Percutaneous Approach",
+    "stock": 4,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Cretan Brake",
+    "price": 10000,
+    "desc": "Removal of Synthetic Substitute from L Carpal, Open Approach",
+    "stock": 5,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "White Cushion Fleabane",
+    "price": 10000,
+    "desc": "Destruction of Left Ankle Joint, Perc Endo Approach",
+    "stock": 6,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Shiny-nutlet Popcornflower",
+    "price": 10000,
+    "desc": "Planar Nucl Med Imag of Up Extrem using Oth Radionuclide",
+    "stock": 7,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Whitehair Goldenrod",
+    "price": 10000,
+    "desc": "Bypass R Brach Vein to Up Vein w Nonaut Sub, Perc Endo",
+    "stock": 8,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Toothed Spurge",
+    "price": 10000,
+    "desc": "Reposition Left Tarsal Joint with Ext Fix, Perc Approach",
+    "stock": 9,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Stiff Blue-eyed Grass",
+    "price": 10000,
+    "desc": "Occlusion L Int Jugular Vein w Extralum Dev, Perc",
+    "stock": 10,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "False Flax",
+    "price": 10000,
+    "desc": "Muscle Perform Assess Neuro Up Back/UE w Oth Equip",
+    "stock": 11,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Snowbrush Ceanothus",
+    "price": 10000,
+    "desc": "Repair Right Toe Phalangeal Joint, External Approach",
+    "stock": 12,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Privet",
+    "price": 10000,
+    "desc": "Fluoroscopy of Abdominal Aorta using Low Osmolar Contrast",
+    "stock": 13,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Antilles Calophyllum",
+    "price": 10000,
+    "desc": "Extirpation of Matter from Transverse Colon, Perc Approach",
+    "stock": 14,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Mesa Dropseed",
+    "price": 10000,
+    "desc": "Dilation of Inferior Mesenteric Vein, Open Approach",
+    "stock": 15,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Billings' Sedge",
+    "price": 10000,
+    "desc": "Release Upper Vein, Percutaneous Approach",
+    "stock": 16,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Hawkweed",
+    "price": 10000,
+    "desc": "Repair Rectum, Via Natural or Artificial Opening Endoscopic",
+    "stock": 17,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Agroelymus",
+    "price": 10000,
+    "desc": "Drainage of Left Elbow Region with Drain Dev, Perc Approach",
+    "stock": 18,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Burke's Baeria",
+    "price": 10000,
+    "desc": "Drain L Ext Jugular Vein w Drain Dev, Perc Endo",
+    "stock": 19,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Saltloving Goosefoot",
+    "price": 10000,
+    "desc": "Repair Phrenic Nerve, Open Approach",
+    "stock": 20,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Serpentine Linanthus",
+    "price": 10000,
+    "desc": "Removal of Synth Sub from Nasal Bone, Perc Approach",
+    "stock": 21,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "European Spindletree",
+    "price": 10000,
+    "desc": "Bypass R Basilic Vein to Up Vein w Autol Sub, Open",
+    "stock": 22,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Bulrush",
+    "price": 10000,
+    "desc": "Drainage of Epidural Space with Drain Dev, Open Approach",
+    "stock": 23,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Chaenothecopsis Lichen",
+    "price": 10000,
+    "desc": "Revision of Synthetic Substitute in R Fibula, Open Approach",
+    "stock": 24,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "California Sycamore",
+    "price": 10000,
+    "desc": "Extirpation of Matter from Left Humeral Head, Open Approach",
+    "stock": 25,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Largeflowered Fiddleneck",
+    "price": 10000,
+    "desc": "Beam Radiation of Sinuses using Electrons, Intraoperative",
+    "stock": 26,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Roughhair Rosette Grass",
+    "price": 10000,
+    "desc": "Resection of Bilateral Adrenal Glands, Perc Endo Approach",
+    "stock": 27,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Pine Flatsedge",
+    "price": 10000,
+    "desc": "Removal of Extraluminal Device from Up Art, Open Approach",
+    "stock": 28,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Pale Pseudoleskea Moss",
+    "price": 10000,
+    "desc": "Revision of Synth Sub in R Finger Phalanx Jt, Open Approach",
+    "stock": 29,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Weniger's Hedgehog Cactus",
+    "price": 10000,
+    "desc": "Destruction of Superior Mesenteric Artery, Open Approach",
+    "stock": 30,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Buckthorn",
+    "price": 10000,
+    "desc": "Restriction of Descending Colon, Perc Endo Approach",
+    "stock": 31,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Sierra Mariposa Lily",
+    "price": 10000,
+    "desc": "Plain Radiography of Thoraco-Abdominal Aorta",
+    "stock": 32,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Siberian Ginseng",
+    "price": 10000,
+    "desc": "Restrict R Hypogast Vein w Extralum Dev, Perc Endo",
+    "stock": 33,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Ditta",
+    "price": 10000,
+    "desc": "Destruction of Left Upper Extremity Lymphatic, Perc Approach",
+    "stock": 34,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Starwort",
+    "price": 10000,
+    "desc": "Bypass R Int Iliac Art to L Int Ilia w Nonaut Sub, Perc Endo",
+    "stock": 35,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Flat-top Draba",
+    "price": 10000,
+    "desc": "Division of Bilateral Ovaries, Perc Endo Approach",
+    "stock": 36,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Twistedhair Spikemoss",
+    "price": 10000,
+    "desc": "CT Scan of B Tracheobronc Tree using L Osm Contrast",
+    "stock": 37,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Torrey's Willowherb",
+    "price": 10000,
+    "desc": "Revision of Extralum Dev in Up Intest Tract, Perc Approach",
+    "stock": 38,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Nickels' Cactus",
+    "price": 10000,
+    "desc": "Fluoroscopy of Bile Ducts using Other Contrast",
+    "stock": 39,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Carbonea Lichen",
+    "price": 10000,
+    "desc": "Removal of Autol Sub from L Metatarsal, Open Approach",
+    "stock": 40,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Carolina Larkspur",
+    "price": 10000,
+    "desc": "Repair Superior Mesenteric Vein, Perc Endo Approach",
+    "stock": 41,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Zacale",
+    "price": 10000,
+    "desc": "Drainage of Left Upper Lung Lobe, Endo, Diagn",
+    "stock": 42,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Lavender Bladderwort",
+    "price": 10000,
+    "desc": "Removal of Int Fix from L Patella, Extern Approach",
+    "stock": 43,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Cap Lichen",
+    "price": 10000,
+    "desc": "Replacement of L Tarsal Jt with Synth Sub, Open Approach",
+    "stock": 44,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Pauper Milkvetch",
+    "price": 10000,
+    "desc": "Excision of Chest Skin, External Approach, Diagnostic",
+    "stock": 45,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Jarilla",
+    "price": 10000,
+    "desc": "Repair Left Sternoclavicular Joint, External Approach",
+    "stock": 46,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Pasture Spikesedge",
+    "price": 10000,
+    "desc": "Dilation of Left Thyroid Artery, Open Approach",
+    "stock": 47,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Recurved Bryoerythrophyllum Moss",
+    "price": 10000,
+    "desc": "Drainage of R Hip Bursa/Lig, Open Approach, Diagn",
+    "stock": 48,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "California Needlegrass",
+    "price": 10000,
+    "desc": "Drainage of Nasal Septum, Perc Endo Approach, Diagn",
+    "stock": 49,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  },
+  {
+    "name": "Oldmaid",
+    "price": 10000,
+    "desc": "Drainage of Pelvis Lymphatic with Drain Dev, Perc Approach",
+    "stock": 50,
+    "typeId": "1906dd90-382e-4b17-8639-f20c9e710024"
+  }
+]

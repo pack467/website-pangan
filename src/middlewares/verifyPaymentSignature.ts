@@ -10,6 +10,7 @@ export default async function VerifySignature(
 ) {
   try {
     const { signature_key } = req.body;
+    if (!signature_key) throw new AppError(statusForbidden);
 
     const transaction = await Transaction.findOne({
       where: { signature: signature_key },

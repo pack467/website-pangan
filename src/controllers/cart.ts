@@ -1,11 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
-import { Cart, Product } from "../models";
+import { Cart, Product, ProductImg } from "../models";
 import AppError from "../middlewares/error";
-import {
-  statusConflict,
-  statusDataNotFound,
-  statusUnauthorized,
-} from "../constant";
+import { statusConflict, statusDataNotFound } from "../constant";
 import { v4 } from "uuid";
 import createResponse from "../middlewares/response";
 
@@ -24,13 +20,13 @@ export const addCart = async (
     if (await Cart.findOne({ where: { userId: UUID, productId } }))
       throw new AppError(statusConflict);
 
-    await Cart.create({
+    const data = await Cart.create({
       productId,
       userId: UUID,
       UUID: v4(),
     });
 
-    createResponse({ res, code: 201, message: "success" });
+    createResponse({ res, code: 201, message: "success", data });
   } catch (err) {
     next(err);
   }
@@ -71,6 +67,12 @@ export const getMyCart = async (
       order: [["createdAt", "DESC"]],
       offset: (page - 1) * limit,
       limit,
+      include: [
+        {
+          model: Product,
+          include: [{ model: ProductImg }],
+        },
+      ],
     });
 
     if (!data.length) throw new AppError(statusDataNotFound);

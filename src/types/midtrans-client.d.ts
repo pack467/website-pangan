@@ -19,6 +19,10 @@ declare module "midtrans-client" {
     transaction_id: string;
     transaction_status: TransactionStatus;
     status_message: string;
+    va_numbers: {
+      bank: string;
+      va_number: string;
+    }[];
   }
 
   export type TransactionStatus =
