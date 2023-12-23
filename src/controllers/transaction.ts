@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import { Transaction } from "../models";
 import AppError from "../middlewares/error";
-import { statusDataNotFound } from "../constant";
+import { statusDataNotFound, statusForbidden } from "../constant";
 import createResponse from "../middlewares/response";
 
 export const getMyTransaction = async (
@@ -109,6 +109,26 @@ export const getAllTransaction = async (
         totalPage: Math.ceil(totalData / limit),
       }
     );
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getTransactionById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { transactionId } = req.params;
+    const { UUID } = req.user;
+
+    const data = await Transaction.findOne({ where: { UUID: transactionId } });
+    if (!data) throw new AppError(statusDataNotFound);
+
+    if (data.userId !== UUID) throw new AppError(statusForbidden);
+
+    createResponse({ res, code: 200, message: "OK", data });
   } catch (err) {
     next(err);
   }
