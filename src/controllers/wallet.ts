@@ -61,7 +61,7 @@ export const paymentNotif = async (
   try {
     const data = await core.transaction.notification(req.body);
 
-    const [_, id, t, type] = data.order_id.split("-");
+    const [, id, , type] = data.order_id.split("-");
     const { transaction_status, signature_key, gross_amount } = data;
 
     const UUID = id.replace(/\./g, "-");

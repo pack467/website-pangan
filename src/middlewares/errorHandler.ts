@@ -24,6 +24,8 @@ export default function ErrorHandler(
     let code =
       err instanceof AppError ? (err as ApplicationError).statusCode : 500;
 
+    if(code === 500) console.log(err)
+
     if (
       err instanceof ValidationError ||
       err instanceof ValidationErrorItem ||

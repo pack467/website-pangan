@@ -133,3 +133,21 @@ export const getTransactionById = async (
     next(err);
   }
 };
+
+export const getProcessedTransaction = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { signature } = req.params;
+    const { UUID } = req.user;
+
+    const data = await Transaction.findOne({ where: { signature } });
+    if (!data || data.userId !== UUID) throw new AppError(statusDataNotFound);
+
+    createResponse({ res, code: 200, message: "OK", data });
+  } catch (err) {
+    next(err);
+  }
+};
