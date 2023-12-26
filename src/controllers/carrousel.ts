@@ -2,7 +2,6 @@ import {
   type Request,
   type Response,
   type NextFunction,
-  response,
 } from "express";
 import { createCarouselValidate } from "../validator/carousel";
 import { Carousel, Product, ProductImg } from "../models";
@@ -26,10 +25,14 @@ export const addCarousel = async (
     })) as (ProductImgAttributes & { Product: ProductAttributes }) | null;
     if (!img) throw new AppError(statusDataNotFound);
 
+    const { count, rows } = await Carousel.findAndCountAll();
+    if (count > 5)
+      throw new AppError({ statusCode: 406, message: "Too many carousel" });
+
     if (
-      await Carousel.findOne({
-        where: { imageId, productId: img.Product.UUID },
-      })
+      rows.find(
+        (el) => el.imageId === imageId && el.productId === img.Product.UUID,
+      )
     )
       throw new AppError(statusConflict);
 
